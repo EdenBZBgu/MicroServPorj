@@ -10,12 +10,11 @@ def upload_file(file, fs, channel, access):
         message = {
             'file_id': str(file_id),
             'mp3_file_id': None,
-            'filename': file.filename,
             'user_id': access['username'],
         }
         try:
             channel.basic_publish(exchange='',
-                                  routing_key='video_queue',
+                                  routing_key='video',
                                   body=json.dumps(message),
                                   properties=pika.BasicProperties(delivery_mode=pika.spec.PERSISTENT_DELIVERY_MODE),
                                   )
